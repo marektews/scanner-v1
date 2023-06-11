@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import Scanner from './components/Scanner.vue'
-import Result from './components/Result.vue'
+import ScannerView from './components/ScannerView.vue'
+import ResultView from './components/ResultView.vue'
 
 const mode = ref(0)
 const qrcode = ref('')
@@ -9,14 +9,19 @@ const qrcode = ref('')
 
 <template>
     <main>
-        <Scanner v-if="mode === 0"
+        <ScannerView v-if="mode === 0"
             @qrcode="qrcode = $event; mode = 1"
         />
-        <Result v-else
+        <ResultView v-else
             :qrcode = qrcode
+            @startScanner="mode = 0; qrcode = ''"
         />
     </main>
 </template>
 
 <style scoped>
+main {
+    min-width: 100vw;
+    min-height: 100vh;
+}
 </style>
