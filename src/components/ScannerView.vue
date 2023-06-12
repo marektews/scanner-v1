@@ -21,7 +21,8 @@ onBeforeUnmount(() => {
 function startDetector() {
     scanner.value = new Html5Qrcode("reader")
     scanner.value.start(
-        { facingMode: "environment" }, {},
+        { facingMode: "environment" }, 
+        { fps: 5 },
         (decodedText, decodedResult) => {
             console.log(`Code matched = ${decodedText}`, decodedResult)
             if(decodedResult.result.format.format === 0) {
@@ -58,21 +59,25 @@ function stopDetector() {
 
 <style scoped>
 .scanner-layout {
-    width: 100vw;
-    height: 100vh;
+    /* width: 100vw; */
+    /* height: 100vh; */
 }
 
 .btns-layout {
-    width: 100%;
-    height: 400px;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    /* width: 100%;
     margin: 0;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 100; */
 }
 
 #reader {
-    width: 100%;
-    height: 50%;
+    /* width: 100%; */
+    /* height: 50%; */
 }
 </style>

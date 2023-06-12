@@ -50,15 +50,15 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="my-cnt">
-        <div class="result-layout" :class="{'bg-success': result == 200, 'bg-danger': result != 200}">
-            <div>{{ pass_nr }}</div>
-            <div>{{ regnum }}</div>
+    <div class="my-cnt" :class="{'bg-success': result == 200, 'bg-danger': (result != 200 && result != undefined)}">
+        <div class="result-layout" >
+            <div class="passnr">{{ pass_nr }}</div>
+            <div class="regnum">{{ regnum }}</div>
             <div class="error-info">{{ errorInfo }}</div>
         </div>
         <div class="btns-layout">
             <button class="btn btn-primary btn-lg" @click="$emit('startScanner')">
-                <i class="fa-solid fa-qrcode fa-4x"/>
+                <i class="fa-solid fa-qrcode fa-2x"/>
                 <div style="margin-top: 0.5rem;">Skanuj następny kod za {{ counter }} sekund</div>
             </button>
         </div>
@@ -67,22 +67,25 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .my-cnt {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    width: 100%;
+    height: 100%;
 }
 .result-layout {
+    position: fixed;
+    top: 0;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 2pt;
     align-items: center;
-    font-size: 4rem;
-    font-weight: bold !important;
+    justify-content: center;
     color: black;
-    padding: 3rem;
+    padding: 5%;
+}
+
+.passnr, .regnum {
+    font-size: 3rem;
+    font-weight: bold !important;
 }
 
 .error-info {
@@ -90,6 +93,9 @@ onBeforeUnmount(() => {
 }
 
 .btns-layout {
+    position: fixed;
+    bottom: 1rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
